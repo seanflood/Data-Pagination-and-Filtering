@@ -41,7 +41,7 @@ function showPage (list, page){
    }
 }
 showPage(data, 1);
-let pageOne = showPage(data, 1);
+
 
 /*
 Create the `addPagination` function
@@ -49,7 +49,7 @@ This function will create and insert/append the elements needed for the paginati
 */
 
 function addPagination(list) {
-   console.log(list); 
+   //console.log(list); 
    // create a variable to calculate the number of pages needed
    let pageTotal = Math.ceil(list.length / 9); 
 
@@ -106,14 +106,42 @@ document.querySelector('header').appendChild(searchBar);
 
 
 
-
+//entry.value.length !== 0
 
 
 
 
 //search button  &&   input box 
 let searchButton = document.querySelector('.searchButton'); 
-let searchInput = document.querySelector('#search')
+let searchInput = document.querySelector('#search'); 
+
+
+
+
+//Search bar functionality here 
+
+function searchIt (entry, dataList){
+
+   
+   
+
+   for (let i = 0; i < dataList.length; i++){
+      let fullName = dataList[i].name.first + dataList[i].name.last;
+      let input = entry.value; 
+         console.log(input)
+         if(fullName.toLowerCase().includes(input.toLowerCase())){
+            console.log(fullName)
+         }
+
+      }
+   }
+
+
+
+ 
+
+
+
 
 
 //WORKING event listener on search button CLICK
@@ -124,8 +152,11 @@ searchButton.addEventListener('click', (e) =>{
 //WORKING event listener on search box KEYUP
 
 searchInput.addEventListener('keyup', (e) =>{
-   console.log('piss')
+   searchIt(searchInput, data);
 })
+
+
+
 
 
 
