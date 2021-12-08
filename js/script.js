@@ -41,6 +41,7 @@ function showPage (list, page){
    }
 }
 showPage(data, 1);
+let pageOne = showPage(data, 1);
 
 /*
 Create the `addPagination` function
@@ -83,10 +84,50 @@ function addPagination(list) {
    } 
 
 
-
-
-
-
-
-// Call functions
 addPagination(data);
+
+
+
+//Search Bar 
+
+let searchBar = document.createElement('form'); 
+searchBar.innerHTML = `
+<label for="search" class="student-search">
+   <span>Search by name</span>
+   <input id="search" placeholder="Search by name...">
+   <button #id="submit" class = "searchButton" type="button"><img src="img/icn-search.svg" alt="Search icon"></button>
+</label>`
+
+document.querySelector('header').appendChild(searchBar);
+
+
+
+
+
+
+
+
+
+
+
+
+//search button  &&   input box 
+let searchButton = document.querySelector('.searchButton'); 
+let searchInput = document.querySelector('#search')
+
+
+//WORKING event listener on search button CLICK
+searchButton.addEventListener('click', (e) =>{
+   console.log('shit')
+})
+
+//WORKING event listener on search box KEYUP
+
+searchInput.addEventListener('keyup', (e) =>{
+   console.log('piss')
+})
+
+
+
+
+
