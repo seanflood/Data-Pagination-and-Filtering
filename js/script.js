@@ -1,14 +1,16 @@
-/*
-Treehouse Techdegree:
-FSJS Project 2 - Data Pagination and Filtering
-*/
 
 
+
+// list param is the "data.js" file object. page is just the page number 
+// 9 students per page
 function showPage (list, page){
    let startIndex = (page * 9) - 9; 
    let endIndex = page * 9;
    let studentList = document.querySelector('.student-list')
    studentList.innerHTML = ""; 
+
+
+
 
 
    for (let i = 0; i <= list.length; i++){
@@ -37,6 +39,10 @@ showPage(data, 1);
 
 
 
+
+
+//create page buttons 
+
 function addPagination(list) {
    let numOfPages = Math.ceil(list.length / 9); 
    let linkList = document.querySelector('.link-list'); 
@@ -51,10 +57,6 @@ function addPagination(list) {
       document.querySelector('button').className = "active";
       }
 
-
-
-
-
    linkList.addEventListener('click', (e) => {
       if (e.target.tagName === 'BUTTON'){
          document.querySelector('.active').className = ''; 
@@ -66,7 +68,17 @@ function addPagination(list) {
    } 
 
 
+
+
+
 addPagination(data);
+
+
+
+
+
+
+
 
 
 
@@ -83,32 +95,32 @@ searchBar.innerHTML = `
 document.querySelector('header').appendChild(searchBar);
 
 
-
-
-
-
 //search button  &&   input box 
 let searchButton = document.querySelector('.searchButton'); 
 let searchInput = document.querySelector('#search'); 
 
 
-
-
-//Search bar functionality here 
-
 function searchIt (entry, list){
-   let newList = [];
+   let studentList = document.querySelector('.student-list')
+   studentList.innerHTML = ""; 
    for (let i = 0; i < list.length; i++){
       let fullName = list[i].name.first + list[i].name.last;
       let input = entry.value
          if(fullName.toLowerCase().includes(input.toLowerCase())){
 
-             newList.push(list[i])
+            stu
+
 
          }
-      }   showPage(newList, 1)
+      }   showPage(studentList, 1)
+         addPagination(studentList);
       
    }
+
+
+
+
+
 
 
 
