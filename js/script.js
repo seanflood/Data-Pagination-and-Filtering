@@ -4,24 +4,13 @@ FSJS Project 2 - Data Pagination and Filtering
 */
 
 
-
-/*
-For assistance:
-   Check out the "Project Resources" section of the Instructions tab: https://teamtreehouse.com/projects/data-pagination-and-filtering#instructions
-   Reach out in your Slack community: https://treehouse-fsjs-102.slack.com/app_redirect?channel=unit-2
-*/
-
-
-
-/*
-Create the `showPage` function
-This function will create and insert/append the elements needed to display a "page" of nine students
-*/
 function showPage (list, page){
    let startIndex = (page * 9) - 9; 
    let endIndex = page * 9;
-   let ul = document.querySelector('.student-list')
-   ul.innerHTML = ""; 
+   let studentList = document.querySelector('.student-list')
+   studentList.innerHTML = ""; 
+
+
    for (let i = 0; i <= list.length; i++){
       if(i >= startIndex && i < endIndex){
          let studentItem = `
@@ -36,31 +25,24 @@ function showPage (list, page){
          </div>
        </li>
          `
-         ul.insertAdjacentHTML('beforeend' , studentItem); 
+         studentList.insertAdjacentHTML('beforeend' , studentItem); 
       }
    }
 }
 showPage(data, 1);
 
 
-/*
-Create the `addPagination` function
-This function will create and insert/append the elements needed for the pagination buttons
-*/
+
+
+
+
 
 function addPagination(list) {
-   //console.log(list); 
-   // create a variable to calculate the number of pages needed
-   let pageTotal = Math.ceil(list.length / 9); 
-
-   // select the element with a class of `link-list` and assign it to a variable
+   let numOfPages = Math.ceil(list.length / 9); 
    let linkList = document.querySelector('.link-list'); 
-   // set the innerHTML property of the variable you just created to an empty string
    linkList.innerHTML = '';
-   // loop over the number of pages needed
-     // create the elements needed to display the pagination button
-     // insert the above elements
-   for (let i = 1; i <= pageTotal; i++){
+
+   for (let i = 1; i <= numOfPages; i++){
       let button = 
       `<li>
          <button type="button">${i}</button>
@@ -74,13 +56,13 @@ function addPagination(list) {
 
 
    linkList.addEventListener('click', (e) => {
-
       if (e.target.tagName === 'BUTTON'){
          document.querySelector('.active').className = ''; 
          e.target.className = 'active'; 
          showPage(list, e.target.textContent) 
-      }
+          }
       })
+
    } 
 
 
@@ -105,12 +87,6 @@ document.querySelector('header').appendChild(searchBar);
 
 
 
-
-//entry.value.length !== 0
-
-
-
-
 //search button  &&   input box 
 let searchButton = document.querySelector('.searchButton'); 
 let searchInput = document.querySelector('#search'); 
@@ -120,25 +96,22 @@ let searchInput = document.querySelector('#search');
 
 //Search bar functionality here 
 
-function searchIt (entry, dataList){
-
-   
-   
-
-   for (let i = 0; i < dataList.length; i++){
-      let fullName = dataList[i].name.first + dataList[i].name.last;
-      let input = entry.value; 
-         console.log(input)
+function searchIt (entry, list){
+   let newList = [];
+   for (let i = 0; i < list.length; i++){
+      let fullName = list[i].name.first + list[i].name.last;
+      let input = entry.value
          if(fullName.toLowerCase().includes(input.toLowerCase())){
-            console.log(fullName)
-         }
 
-      }
+             newList.push(list[i])
+
+         }
+      }   showPage(newList, 1)
+      
    }
 
 
 
- 
 
 
 
@@ -146,13 +119,14 @@ function searchIt (entry, dataList){
 
 //WORKING event listener on search button CLICK
 searchButton.addEventListener('click', (e) =>{
-   console.log('shit')
+   console.log('search button test')
 })
 
 //WORKING event listener on search box KEYUP
 
 searchInput.addEventListener('keyup', (e) =>{
    searchIt(searchInput, data);
+
 })
 
 
