@@ -101,19 +101,17 @@ let searchInput = document.querySelector('#search');
 
 
 function searchIt (entry, list){
-   let studentList = document.querySelector('.student-list')
-   studentList.innerHTML = ""; 
+   let newList = []; 
    for (let i = 0; i < list.length; i++){
       let fullName = list[i].name.first + list[i].name.last;
       let input = entry.value
          if(fullName.toLowerCase().includes(input.toLowerCase())){
-
-            stu
-
+            newList.push(list[i]); 
+            addPagination(newList);
 
          }
-      }   showPage(studentList, 1)
-         addPagination(studentList);
+      }   showPage(newList, 1)
+         
       
    }
 
