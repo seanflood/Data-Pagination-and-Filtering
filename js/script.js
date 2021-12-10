@@ -1,8 +1,14 @@
 
 
 
-// list param is the "data.js" file object. page is just the page number 
-// 9 students per page
+
+
+
+
+
+// showPage function displays a page of 9 students
+// list = student date array
+// page = page number displayed 
 function showPage (list, page){
    let startIndex = (page * 9) - 9; 
    let endIndex = page * 9;
@@ -10,9 +16,7 @@ function showPage (list, page){
    studentList.innerHTML = ""; 
 
 
-
-
-
+// loops through list to determine students displayed on page based on index value and adds to studentList
    for (let i = 0; i <= list.length; i++){
       if(i >= startIndex && i < endIndex){
          let studentItem = `
@@ -34,14 +38,7 @@ function showPage (list, page){
 showPage(data, 1);
 
 
-
-
-
-
-
-
-
-//create page buttons 
+//addPagination function creates page buttons in increments of 9
 
 function addPagination(list) {
    let numOfPages = Math.ceil(list.length / 9); 
@@ -57,6 +54,8 @@ function addPagination(list) {
       document.querySelector('button').className = "active";
       }
 
+
+   // click handler adds and removes 'active' class to only display 'active' on the currently clicked page button
    linkList.addEventListener('click', (e) => {
       if (e.target.tagName === 'BUTTON'){
          document.querySelector('.active').className = ''; 
@@ -68,21 +67,10 @@ function addPagination(list) {
    } 
 
 
-
-
-
 addPagination(data);
 
 
-
-
-
-
-
-
-
-
-//Search Bar 
+// create searchBar form and append to header
 
 let searchBar = document.createElement('form'); 
 searchBar.innerHTML = `
@@ -95,9 +83,13 @@ searchBar.innerHTML = `
 document.querySelector('header').appendChild(searchBar);
 
 
-//search button  &&   input box 
+//search button & input box 
 let searchButton = document.querySelector('.searchButton'); 
 let searchInput = document.querySelector('#search'); 
+
+
+
+
 
 
 function searchIt (entry, list){
@@ -105,10 +97,9 @@ function searchIt (entry, list){
    for (let i = 0; i < list.length; i++){
       let fullName = list[i].name.first + list[i].name.last;
       let input = entry.value
-         if(fullName.toLowerCase().includes(input.toLowerCase())){
+         if(input !== 0 && fullName.toLowerCase().includes(input.toLowerCase())){
             newList.push(list[i]); 
             addPagination(newList);
-
          }
       }   showPage(newList, 1)
          
@@ -129,7 +120,7 @@ function searchIt (entry, list){
 
 //WORKING event listener on search button CLICK
 searchButton.addEventListener('click', (e) =>{
-   console.log('search button test')
+   searchIt(searchInput, data);
 })
 
 //WORKING event listener on search box KEYUP
