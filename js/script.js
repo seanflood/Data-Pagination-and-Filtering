@@ -1,7 +1,7 @@
 
 
 
-
+let numOfPages = 9; 
 
 
 
@@ -10,8 +10,8 @@
 // list = student date array
 // page = page number displayed 
 function showPage (list, page){
-   let startIndex = (page * 9) - 9; 
-   let endIndex = page * 9;
+   let startIndex = (page * numOfPages) - numOfPages; 
+   let endIndex = page * numOfPages;
    let studentList = document.querySelector('.student-list')
    studentList.innerHTML = ""; 
 
@@ -52,15 +52,16 @@ function addPagination(list) {
       </li>`;
       linkList.insertAdjacentHTML('beforeend', button)
       document.querySelector('button').className = "active";
-      }
-
+}
 
    // click handler adds and removes 'active' class to only display 'active' on the currently clicked page button
-   linkList.addEventListener('click', (e) => {
+linkList.addEventListener('click', (e) => {
       if (e.target.tagName === 'BUTTON'){
          document.querySelector('.active').className = ''; 
          e.target.className = 'active'; 
+         document.querySelector('button').className = "active"
          showPage(list, e.target.textContent) 
+
           }
       })
 
@@ -88,9 +89,9 @@ let searchButton = document.querySelector('.searchButton');
 let searchInput = document.querySelector('#search'); 
 
 
+ 
 
-
-
+//searchIt function displays 'students' containing value of user input
 
 function searchIt (entry, list){
    let newList = []; 
@@ -100,10 +101,10 @@ function searchIt (entry, list){
          if(input !== 0 && fullName.toLowerCase().includes(input.toLowerCase())){
             newList.push(list[i]); 
             addPagination(newList);
+            
          }
-      }   showPage(newList, 1)
-         
-      
+      } 
+      showPage(newList, 1)
    }
 
 
