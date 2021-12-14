@@ -63,32 +63,41 @@ function showPage (list, page){
 //addPagination function creates page buttons in increments of 9
 
 function addPagination(list) {
-   let numOfPages = Math.ceil(list.length / 9); 
-   let linkList = document.querySelector('.link-list'); 
+   let numOfPages = Math.ceil(list.length / 9);
+   let linkList = document.querySelector('.link-list');
    linkList.innerHTML = '';
 
+   
    for (let i = 1; i <= numOfPages; i++){
-      let button = 
+    if (i === 1) {
+      let button =
+      `<li>
+         <button class="active" type="button">${i}</button>
+      </li>`;
+ 
+      linkList.insertAdjacentHTML('beforeend', button)
+    } else {
+      let button =
       `<li>
          <button type="button">${i}</button>
       </li>`;
-
+ 
       linkList.insertAdjacentHTML('beforeend', button)
-      document.querySelector('button').className = "active";
-      }
-
-      linkList.addEventListener('click', (e) => {
-      if (e.target.tagName === 'BUTTON'){; 
-         document.querySelector('.active').className = ''; 
-         e.target.className = 'active'; 
-         }
-         showPage(list, e.target.textContent) 
-
-          
-
-      })
-
-   } 
+    }
+   }
+ 
+   linkList.addEventListener('click', (e) => {
+     const pageList = document.querySelectorAll('.link-list li button');
+     pageList.forEach(item => {
+         item.classList.remove('active')
+     })
+ 
+     if (e.target.tagName === 'BUTTON'){;
+        e.target.className = 'active';
+     }
+     showPage(list, e.target.textContent)
+   })
+  }
 
 
 
