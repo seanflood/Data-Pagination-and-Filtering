@@ -1,22 +1,28 @@
 
 
 
-let numOfPages = 9; 
+let studentsPerPage = 9; 
+
+
+
 
 
 
 
 // showPage function displays a page of 9 students
-// list = student date array
+// list = student data array
 // page = page number displayed 
+
+
 function showPage (list, page){
-   let startIndex = (page * numOfPages) - numOfPages; 
-   let endIndex = page * numOfPages;
+   let startIndex = (page * studentsPerPage) - studentsPerPage; 
+   let endIndex = page * studentsPerPage;
    let studentList = document.querySelector('.student-list')
    studentList.innerHTML = ""; 
 
 
 // loops through list to determine students displayed on page based on index value and adds to studentList
+   if(list.length > 0){
    for (let i = 0; i <= list.length; i++){
       if(i >= startIndex && i < endIndex){
          let studentItem = `
@@ -34,8 +40,24 @@ function showPage (list, page){
          studentList.insertAdjacentHTML('beforeend' , studentItem); 
       }
    }
+   }else{
+      studentList.insertAdjacentHTML('beforeend', '<h1> No Results Found</h1>')
+   }
 }
-showPage(data, 1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //addPagination function creates page buttons in increments of 9
@@ -50,25 +72,34 @@ function addPagination(list) {
       `<li>
          <button type="button">${i}</button>
       </li>`;
+
       linkList.insertAdjacentHTML('beforeend', button)
       document.querySelector('button').className = "active";
-}
+      }
 
-   // click handler adds and removes 'active' class to only display 'active' on the currently clicked page button
-linkList.addEventListener('click', (e) => {
-      if (e.target.tagName === 'BUTTON'){
+      linkList.addEventListener('click', (e) => {
+      if (e.target.tagName === 'BUTTON'){; 
          document.querySelector('.active').className = ''; 
          e.target.className = 'active'; 
-         document.querySelector('button').className = "active"
+         }
          showPage(list, e.target.textContent) 
 
-          }
+          
+
       })
 
    } 
 
 
-addPagination(data);
+
+
+
+
+
+
+
+
+
 
 
 // create searchBar form and append to header
@@ -83,13 +114,10 @@ searchBar.innerHTML = `
 
 document.querySelector('header').appendChild(searchBar);
 
-
 //search button & input box 
 let searchButton = document.querySelector('.searchButton'); 
 let searchInput = document.querySelector('#search'); 
 
-
- 
 
 //searchIt function displays 'students' containing value of user input
 
@@ -101,6 +129,7 @@ function searchIt (entry, list){
          if(input !== 0 && fullName.toLowerCase().includes(input.toLowerCase())){
             newList.push(list[i]); 
             addPagination(newList);
+
             
          }
       } 
@@ -138,3 +167,5 @@ searchInput.addEventListener('keyup', (e) =>{
 
 
 
+addPagination(data);
+showPage(data, 1);
