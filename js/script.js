@@ -19,7 +19,7 @@ function showPage (list, page){
 
 // loops through list to determine students displayed on page based on index value and adds to studentList
    if(list.length > 0){
-   for (let i = 0; i <= list.length; i++){
+   for (let i = 0; i < list.length; i++){
       if(i >= startIndex && i < endIndex){
          let studentItem = `
          <li class="student-item cf">
@@ -80,8 +80,9 @@ function addPagination(list) {
      })
      if (e.target.tagName === 'BUTTON'){;
         e.target.className = 'active';
+        showPage(list, e.target.textContent)
      }
-     showPage(list, e.target.textContent)
+     
    })
   }
 
