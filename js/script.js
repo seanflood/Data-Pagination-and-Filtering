@@ -1,19 +1,15 @@
+// |Team Treehouse FSJS Unit 2 project|
+// |Sean Flood Dec, 2021|
+// |A website to display several “pages” of student data that the user can easily navigate and view.|
+
+//Sets amount of displayed 'student' items per page. 
+let studentsPerPage = 9;                                                                                                                 
 
 
-
-let studentsPerPage = 9; 
-
-
-
-
-
-
-
-// showPage function displays a page of 9 students
-// list = student data array
-// page = page number displayed 
-
-
+/**showPage function displays a page of 9 students
+ * page = page number displayed 
+ * list = student data array
+*/ 
 function showPage (list, page){
    let startIndex = (page * studentsPerPage) - studentsPerPage; 
    let endIndex = page * studentsPerPage;
@@ -48,26 +44,16 @@ function showPage (list, page){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-//addPagination function creates page buttons in increments of 9
+/**addPagination function creates page buttons in increments of 9
+ * Loops through the number of pages and if page === 1 set to active. 
+ * Else set clicked page to active
+ * */
 
 function addPagination(list) {
    let numOfPages = Math.ceil(list.length / 9);
    let linkList = document.querySelector('.link-list');
    linkList.innerHTML = '';
 
-   
    for (let i = 1; i <= numOfPages; i++){
     if (i === 1) {
       let button =
@@ -86,28 +72,18 @@ function addPagination(list) {
     }
    }
  
+   //Event listener used to set '.active' to clicked page button
    linkList.addEventListener('click', (e) => {
      const pageList = document.querySelectorAll('.link-list li button');
      pageList.forEach(item => {
          item.classList.remove('active')
      })
- 
      if (e.target.tagName === 'BUTTON'){;
         e.target.className = 'active';
      }
      showPage(list, e.target.textContent)
    })
   }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -129,7 +105,6 @@ let searchInput = document.querySelector('#search');
 
 
 //searchIt function displays 'students' containing value of user input
-
 function searchIt (entry, list){
    let newList = []; 
    for (let i = 0; i < list.length; i++){
@@ -138,8 +113,6 @@ function searchIt (entry, list){
          if(input !== 0 && fullName.toLowerCase().includes(input.toLowerCase())){
             newList.push(list[i]); 
             addPagination(newList);
-
-            
          }
       } 
       showPage(newList, 1)
@@ -147,22 +120,11 @@ function searchIt (entry, list){
 
 
 
-
-
-
-
-
-
-
-
-
-
-//WORKING event listener on search button CLICK
+//Event listeners for 'click' and 'keyup'
 searchButton.addEventListener('click', (e) =>{
    searchIt(searchInput, data);
 })
 
-//WORKING event listener on search box KEYUP
 
 searchInput.addEventListener('keyup', (e) =>{
    searchIt(searchInput, data);
@@ -170,11 +132,6 @@ searchInput.addEventListener('keyup', (e) =>{
 })
 
 
-
-
-
-
-
-
+// Function Calls 
 addPagination(data);
 showPage(data, 1);
